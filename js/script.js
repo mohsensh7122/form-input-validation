@@ -28,9 +28,12 @@ document.querySelector('#languages').addEventListener('change', e => {
 /* Helper function to validate name input */
 const nameValidator = () => {
 
-  // 1. Create a variable named `nameValue` to store the `.value` property of the `nameElement` input and log the variable out to the console — console.log("Name value is: ", `"${nameValue}"`);
+  // 1. Create a variable named `nameValue` to store the `.value` property of the `nameElement` input and log the variable out to the console — ;
     // To see the result of this function's log statements, call this `nameValidator()` function in the `submit` handler below, 
     // and then save the file, refresh the page in the browser and click the form's submit button.
+
+    const nameValue = nameElement.value;
+    console.log("Name value is: ", `"${nameValue}"`)
 
   // 2. Create a variable named `nameIsValid` to store the test value for this input.
     // Since the name field's requirement is that it can't be blank, that should look something like this:
@@ -38,7 +41,13 @@ const nameValidator = () => {
     // That tests that there is at least a first name containing only letters, and allows for a middle and last name.
     // Log out something like this: console.log(`Name validation test on "${nameValue}" evaluates to ${nameIsValid}`);.
 
+  const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
+  console.log(`Name validation test on "${nameValue}" evaluates to ${nameIsValid}`);
+
+
   // 3. Lastly, return `nameIsValid`.
+
+  return nameIsValid;
 
 }
 
@@ -48,6 +57,9 @@ const emailValidator = () => {
 
   // 1. Create a variable named `emailValue` to store the `.value` property of the `emailAddress` input and log the variable out to the console — console.log("Email value is: ", `"${emailValue}"`);
 
+  const emailValue = email.value;
+  console.log("Email value is: ", `"${emailValue}"`);
+
   // 2. Create a variable named `emailIsValid` to store the test value for this input.
     // Since the email field's requirement is that it should be a validly formatted email address with a `.com` TLD, 
     // the variable should look something like this:
@@ -56,8 +68,13 @@ const emailValidator = () => {
     // and a “.com” for the domain name.
     // Log out something like this: console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);.
 
+  const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+  console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
+    
+
   // 3. Lastly, return `emailIsValid`.
 
+  return emailIsValid;
 }
 
 
@@ -70,7 +87,12 @@ const languageValidator = () => {
     // That tests that the `languageTotal` variable provided for you above equals an integer greater than zero.
     // Log out something like this: `console.log(`Language section validation test evaluates to ${languageSectionIsValid}`);`.
 
+  const languageSectionIsValid = languageTotal > 0;
+  console.log(`Language section validation test evaluates to ${languageSectionIsValid}`);
+
   // 2. Lastly, return `languageSectionIsValid`.
+
+  return languageSectionIsValid;
 
 }
 
@@ -78,7 +100,9 @@ const languageValidator = () => {
 
 /* Submit listener on the form element */
 form.addEventListener('submit', e => {
-
+  nameValidator();
+  emailValidator();
+  languageValidator();
   // IMPORTANT NOTE: Firing the submit event will refresh the page and reset the form, erasing your log statements.
     // This can be prevented by calling `e.preventDefault()` here in this submit handler, or
     // by clicking on the gear icon in the upper right hand corner of the Chrome DevTools console to enter the settings menu,
@@ -93,7 +117,7 @@ form.addEventListener('submit', e => {
 
 
   // Preventing form submission for testing purposes. Remove or comment out as needed and before completion
-  e.preventDefault();
+  
 
 
   // 1. Create an if statement
@@ -102,6 +126,20 @@ form.addEventListener('submit', e => {
   
   // 2. Repeat the above step for the rest of your validation functions
 
+  if(!nameValidator()){
+    e.preventDefault;
+    console.log('Name validator prevented submission');
+  }
+
+  if(!emailValidator()){
+    e.preventDefault;
+    console.log('Email validator prevented submission');
+  }
+
+  if(!languageValidator()){
+    e.preventDefault;
+    console.log('Name validator prevented submission');
+  }
 
   // And feel free to comment out or delete any log statements from the validation functions above
 
